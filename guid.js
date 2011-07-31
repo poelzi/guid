@@ -93,11 +93,15 @@ function Guid(guid) {
   } else if (guid && guid instanceof Buffer) {
     // binary buffer
     value = hex2uuid(bin2hex(guid));
-  } else if (guid && Object.prototype.toString.call(guid) === "[object String]" && Guid.isGuid(guid, true)) {
-    if(guid.length == 32) // value is a pure hex string
-      value = hex2uuid(guid)
-    else
-      value = guid;
+  } else if (guid && Object.prototype.toString.call(guid) === "[object String]") {
+    if(Guid.isGuid(guid, true)) {
+      if(guid.length == 32) // value is a pure hex string
+        value = hex2uuid(guid)
+      else
+        value = guid;
+    } else if (guid.length == 16) {
+        value = hex2uuid(bin2hex(guid));
+    }
   }
 
   this.equals = function(other) {

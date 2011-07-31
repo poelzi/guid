@@ -36,6 +36,10 @@ tests.suite1 = vows.describe('guid tests').addBatch({
 
         var g2 = Guid.create(buf);
         assert.equal(g.value, g2.value, "copy over buffer failed");
+
+        var g3 = Guid.create('\x00\x00\x00\x00\x00\x00\x00\x00\xab\xcd\x12\x34\x56\x78\x90\x12');
+        assert.equal(g3.value, "00000000-0000-0000-abcd-123456789012")
+
     }
 },
 });
