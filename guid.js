@@ -138,6 +138,10 @@ function Guid(guid) {
     return bin = new Buffer(this.toArray());
   }
   
+  this.inspect = function() {
+    return "<Guid " + this.value + ">"
+  }
+
   Object.defineProperty(this, "value", {
     get: function() { return value; },
     enumerable: true
